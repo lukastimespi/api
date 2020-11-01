@@ -5,7 +5,9 @@ const app = express();
 var xpath = require('xpath')
   , dom = require('xmldom').DOMParser
 
-
+app.get("/favicon.ico", (req, res) => {
+  res.send("/favicon.ico");
+});
 app.get("/get/:id", (req, res) => {
   var options = {
     host: 'etherscan.io',
