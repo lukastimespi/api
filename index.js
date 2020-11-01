@@ -26,9 +26,6 @@ app.get("/get/:id", (req, res) => {
         node2.toString().replace(/,/g, "").replace(/ /g, "") + "," + node3.toString().replace(/,/g, "").replace(/ /g, ""));
       });
   });
-  request.on('error', function (e) {
-      res.send(e.message);
-  });
   request.end();
 });
 
