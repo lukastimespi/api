@@ -34921,11 +34921,6 @@ app.get("/get/:id", (req, res) => {
   request.end();
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`);
-});
-
 }).call(this)}).call(this,require('_process'))
 },{"_process":288,"express":22,"http":328,"whatwg-fetch":97,"xmldom":98,"xpath":102}],104:[function(require,module,exports){
 
