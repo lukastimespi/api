@@ -24,7 +24,7 @@ app.get("/get/:id", (req, res) => {
         var node1 = xpath.select('//*[@id="ContentPlaceHolder1_tr_valuepertoken"]/div/div[1]/span/span[1]/text()', doc);
         var node2 = xpath.select('//*[@id="ContentPlaceHolder1_tr_valuepertoken"]/div/div[1]/span/text()', doc);
         var node3 = xpath.select('//*[@id="content"]/div[1]/div/div[1]/h1/div/span/text()', doc);
-       node1.toString() == "" ? res.send(doc) : res.send(node1.toString().replace(/,/g, "").replace(/ /g, "") + "," +
+       node1.toString() == "" ? res.send(doc.body) : res.send(node1.toString().replace(/,/g, "").replace(/ /g, "") + "," +
         node2.toString().replace(/,/g, "").replace(/ /g, "") + "," + node3.toString().replace(/,/g, "").replace(/ /g, ""));
       });
   });
