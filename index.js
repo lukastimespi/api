@@ -12,7 +12,7 @@ app.get("/get/:id", (req, res) => {
   var options = {
     host: 'etherscan.io',
     path: '/token/' + req.params.id,
-    headers: {'Access-Control-Allow-Origin': '*'}
+    headers: {'Access-Control-Allow-Origin': 'http://etherscan.io'}
   }
   var request = http.request(options, function (rest) {
       var data = '';
@@ -36,6 +36,6 @@ app.get("/get/:id", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}...`);
 });
