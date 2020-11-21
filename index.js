@@ -11,8 +11,7 @@ var xpath = require('xpath')
 app.get("/get/:id", (req, res) => {
   var options = {
     host: 'etherscan.io',
-    path: '/token/' + req.params.id,
-    headers: {'Access-Control-Allow-Origin': 'http://etherscan.io' + '/token/' + req.params.id}
+    path: '/token/' + req.params.id
   }
   var request = http.request(options, function (rest) {
       var data = '';
