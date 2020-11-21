@@ -1,4 +1,4 @@
-const http = require('https');
+const http = require('http');
 const express = require("express");
 const fetch = require("whatwg-fetch");
 const app = express();
@@ -8,11 +8,13 @@ var xpath = require('xpath')
   app.get("/favicon.ico", (req, res) => {
     res.send("/favicon.ico");
   });
-
 app.get("/get/:id", (req, res) => {
   var options = {
-    host: 'info.uniswap.org',
-    path: '/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+    host: 'etherscan.io',
+    path: '/token/' + req.params.id,
+    port: null,
+    method: "GET",
+    headers: {'Access-Control-Allow-Origin': 'http://etherscan.io' + '/token/' + req.params.id}
   }
   var request = http.request(options, function (rest) {
       var data = '';
@@ -21,8 +23,11 @@ app.get("/get/:id", (req, res) => {
       });
       rest.on('end', function () {
         var doc = new dom().parseFromString(data);
-        var node1 = xpath.select('//*[@id="center"]/div/div[3]/div[2]/div/div[1]/div/div/div[3]', doc);
-        res.send(node1);
+        var node1 = xpath.select('//*[@id="ContentPlaceHolder1_tr_valuepertoken"]/div/div[1]/span/span[1]/text()', doc);
+        var node2 = xpath.select('//*[@id="ContentPlaceHolder1_tr_valuepertoken"]/div/div[1]/span/text()', doc);
+        var node3 = xpath.select('//*[@id="content"]/div[1]/div/div[1]/h1/div/span/text()', doc);
+      node1.toString() == "" ? res.send(data) : res.send(node1.toString().replace(/,/g, "").replace(/ /g, "") + "," +
+         node2.toString().replace(/,/g, "").replace(/ /g, "") + "," + node3.toString().replace(/,/g, "").replace(/ /g, ""));
       });
   });
   request.on('error', function (e) {
