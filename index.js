@@ -13,7 +13,7 @@ var xpath = require('xpath')
 
   app.get("/test", (req, res) => {
     var options = {
-      url: 'https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7',
+      url: 'https://info.uniswap.org/token/0xdac17f958d2ee523a2206206994597c13d831ec7',
       headers: {
         // User agent, Cache Control and Accept headers are required
         // User agent is populated by a random UA.
