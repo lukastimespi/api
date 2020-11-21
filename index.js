@@ -5,10 +5,16 @@ const app = express();
 var xpath = require('xpath')
   , dom = require('xmldom').DOMParser
   const CloudflareBypasser = require('cloudflare-bypasser');
-
+  var cloudscraper = require('cloudscraper');
   let cf = new CloudflareBypasser();
   app.get("/favicon.ico", (req, res) => {
     res.send("/favicon.ico");
+  });
+
+  app.get("/test", (req, res) => {
+    cloudscraper.get('https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7').then((value) => {
+      res.send(value);
+    });
   });
 app.get("/get/:id", (req, res) => {
   
