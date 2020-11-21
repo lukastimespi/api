@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "jsdom": "^16.4.0",
+    "request-cloudflare": "^2.0.0",
     "whatwg-fetch": "^3.4.1",
     "xmldom": "^0.3.0",
     "xpath": "0.0.30"
