@@ -17,7 +17,11 @@ app.get("/get/:id", (req, res) => {
     data += chunk;
   });
   resp.on('end', () => {
-    res.send("@" + JSON.parse(data)["market_data"]["current_price"]["eth"] + "Eth" + "," + "$" + JSON.parse(data)["market_data"]["current_price"]["usd"] + "," + JSON.parse(data)["name"]);
+    if(JSON.parse(data)["error"] != null) {
+      res.send("error");
+    } else {
+      res.send("@" + JSON.parse(data)["market_data"]["current_price"]["eth"] + "Eth" + "," + "$" + JSON.parse(data)["market_data"]["current_price"]["usd"] + "," + JSON.parse(data)["name"]);
+    }
   });
 
 }).on("error", (err) => {
