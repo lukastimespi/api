@@ -19,7 +19,7 @@ function httpGet(theUrl)
     return xmlHttp.responseText;
 }
 app.get("/test", (req, res) => {
-  res.send(httpGet("https://www.instagram.com/graphql/query/?query_hash=298b92c8d7cad703f7565aa892ede943&variables={\"tag_name\":\"random\",\"first\":12,\"after\":\"\"}"));
+  res.send("dsa");
 });
 //@0.001678Eth, $0.9979 ,TetherUSD
 const PORT = process.env.PORT || 3000;
