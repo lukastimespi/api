@@ -11,28 +11,15 @@ const { parse } = require('path');
 app.get("/favicon.ico", (req, res) => {
   res.send("/favicon.ico");
 });
-
-app.get("/get/:id", (req, res) => {
-  var sfa = "";
-  axios.get('https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=' + req.params.id + '&page=1&offset=5&apikey=QR62GI9FPA5JQ38576IVBWP53P9MBYYK7V').then(function (responses) { 
-    const DAI = new s.Token(s.ChainId.MAINNET, req.params.id, responses.data.result[0].tokenDecimal)
-    s.Fetcher.fetchPairData(DAI, s.WETH[DAI.chainId]).then((ressu) => {
-      axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
-    .then(function (response) {
-      const route = new s.Route([ressu], s.WETH[DAI.chainId])
-      res.send("@"+route.midPrice.invert().toSignificant(6) + "Eth" + ",$" + String(parseFloat(String(response.data.USD)* parseFloat(String(route.midPrice.invert().toSignificant(6))))) + "," + responses.data.result[0].tokenName);
-    })
-    .catch(function (error) {
-      res.send("error")
-    })
-    .then(function () {
-    });
-    }).catch((error) => {
-      res.send("error");
-    });
-    }).catch(function (error) {
-      res.send("error");
-    });
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+app.get("/test", (req, res) => {
+  res.send(httpGet("https://www.instagram.com/graphql/query/?query_hash=298b92c8d7cad703f7565aa892ede943&variables={\"tag_name\":\"random\",\"first\":12,\"after\":\"\"}"));
 });
 //@0.001678Eth, $0.9979 ,TetherUSD
 const PORT = process.env.PORT || 3000;
